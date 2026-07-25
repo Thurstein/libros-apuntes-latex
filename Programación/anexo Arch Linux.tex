@@ -1,0 +1,281 @@
+\chapter{Instalación de Arch Linux}
+
+\newpage
+\section{Conectar a Wi-Fi y Verificar Entorno}
+El primer paso requiere establecer una conexión activa a internet mediante el entorno interactivo de instalación y comprobar la arquitectura de la placa madre.
+
+\begin{enumerate}
+\item[$\bullet$] \textbf{Verificación de Arquitectura EFI}: para corroborar que el sistema inició en modo UEFI, listamos las variables de firmware correspondientes.
+\begin{lstlisting}
+ls /sys/firmware/efi/efivars
+\end{lstlisting}
+\item[$\bullet$] \textbf{Conexión a la Red Inalámbrica}: utilizamos la herramienta interactiva \texttt{iwctl} para autenticar la tarjeta de red y conectarnos al punto de acceso:
+\begin{lstlisting}
+iwctl
+# Dentro del entorno iwctl:
+station wlan0 scan
+station wlan0 get-networks
+station wlan0 connect NombreRed
+quit
+\end{lstlisting}
+\end{enumerate}
+
+\begin{nota}[Instalación de Arch en Lenovo Ideapad 100]
+\begin{enumerate}
+\item[$\bullet$] \textbf{Solución de Errores Específicos de Hardware (Módulos Realtek)}
+En laptops Lenovo IdeaPad 100 o equipos con tarjetas inalámbricas Realtek conflictivas (como la \texttt{rtl8723be}), es necesario forzar la antena correcta para evitar pérdidas de señal:
+\begin{lstlisting}
+modprobe -r rtl8723be
+modprobe rtl8723be ant_sel=2
+ip link set wlan0 up
+\end{lstlisting}
+\end{enumerate}
+\end{nota}
+
+\begin{enumerate}
+\item[$\bullet$] \textbf{Verificación de Conectividad}
+Comprobamos el envío y recepción de paquetes ICMP para asegurar el enlace:
+\begin{lstlisting}
+ping -c 3 google.com
+\end{lstlisting}
+\end{enumerate}
+
+\newpage
+
+\section{Particionado y Formateo del Disco}
+Trabajaremos sobre el esquema del disco físico principal indexado como \texttt{/dev/sda}.
+
+\begin{enumerate}
+    \item [$\bullet$] \textbf{Limpieza de la Tabla de Particiones}
+    Eliminamos cualquier estructura previa de almacenamiento y creamos una nueva tabla de particiones de tipo \textbf{GPT} (GUID Partition Table):
+    \begin{lstlisting}
+    parted /dev/sda
+    # Dentro del entorno parted:
+    mklabel gpt
+    quit
+    \end{lstlisting}
+    \item [$\bullet$] \textbf{Estructura de Particiones en \texttt{cfdisk}}
+    Accedemos a la herramienta visual \texttt{cfdisk} seleccionando la tabla de particiones de tipo \textbf{GPT}:
+    \begin{lstlisting}
+    cfdisk /dev/sda
+    \end{lstlisting}
+
+    Se define la siguiente distribución del almacenamiento:
+    \begin{itemize}
+        \item \textbf{\texttt{/dev/sda1}:} Nueva $\rightarrow$ $1\text{ GB}$ $\rightarrow$ Type: \textit{EFI System}.
+        \item \textbf{\texttt{/dev/sda2}:} Nueva $\rightarrow$ $4\text{ GB}$ $\rightarrow$ Type: \textit{Linux swap}.
+        \item \textbf{\texttt{/dev/sda3}:} Nueva $\rightarrow$ Resto del disco $\rightarrow$ Type: \textit{Linux filesystem}.
+    \end{itemize}
+
+    \item [$\bullet$] \textbf{Formateo de Particiones}
+    Asignamos los sistemas de archivos correspondientes a cada bloque estructurado:
+    \begin{lstlisting}
+    # Particion EFI (FAT32)
+    mkfs.fat -F 32 /dev/sda1
+
+    # Particion Swap (Intercambio)
+    mkswap /dev/sda2
+    swapon /dev/sda2
+
+    # Particion Raiz (ext4)
+    mkfs.ext4 /dev/sda3
+    \end{lstlisting}
+\end{enumerate}
+
+\begin{nota}[]
+    Aplicar cambios escribiendo \texttt{write}, confirmar con \texttt{yes} y presionar \texttt{Quit} para salir.
+\end{nota}
+
+\newpage
+
+\section{Instalación del Sistema Base}
+Preparamos los puntos de montaje e inyectamos el núcleo del sistema operativo.
+
+\begin{enumerate}
+\item [$\bullet$] \textbf{Montaje Inicial de Unidades}
+Montamos la raíz e inicializamos el directorio interno para la partición de arranque:
+\begin{lstlisting}
+mount /dev/sda3 /mnt
+mkdir -p /mnt/boot
+mount /dev/sda1 /mnt/boot
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Instalación mediante \texttt{pacstrap}}
+Descargamos los paquetes esenciales en la raíz montada:
+\begin{lstlisting}
+pacstrap -K /mnt base linux linux-firmware nano
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Generación del Archivo de Puntos de Montaje (\texttt{fstab})}
+Registramos los identificadores únicos de las particiones para los arranques subsecuentes:
+\begin{lstlisting}
+genfstab -U /mnt >> /mnt/etc/fstab
+\end{lstlisting}
+\end{enumerate}
+
+\section{Configuración del Sistema Interno (\texttt{chroot})}
+
+\begin{enumerate}
+\item [$\bullet$] \textbf{Acceso al Entorno Virtualizado}
+Ingresamos formalmente al disco duro del equipo para estructurar las directivas de usuario y localización.
+\begin{lstlisting}
+arch-chroot /mnt
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Zona Horaria y Reloj del Sistema}
+Establecemos el huso horario correspondiente a Chile continental y sincronizamos los relojes de hardware:
+\begin{lstlisting}
+ln -sf /usr/share/zoneinfo/America/Santiago /etc/localtime
+hwclock --systohc
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Localización e Idioma}
+Editamos las plantillas generadoras de idioma del sistema:
+\begin{lstlisting}
+nano /etc/locale.gen
+\end{lstlisting}
+
+\item [$\bullet$] Descomentar desmarcando el caracter '\#' en la linea: 
+\begin{lstlisting}
+es_CL.UTF-8 UTF-8
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Compilación de Idiomas}
+Compilamos los idiomas habilitados y fijamos la variable de entorno global:
+\begin{lstlisting}
+locale-gen
+echo "LANG=es_CL.UTF-8" > /etc/locale.conf
+\end{lstlisting}
+\end{enumerate}
+
+\section{Configuración del Sistema}
+
+\begin{enumerate}
+\item [$\bullet$] \textbf{Configuración del Teclado en Consola (TTY)}
+Para que la distribución del teclado en modo texto reconozca la disposición en español:
+\begin{lstlisting}
+echo "KEYMAP=es" > /etc/vconsole.conf
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Identidad de Red (Hostname)}
+Asignamos un nombre único a la máquina en la red local y asignamos la contraseña maestra de \texttt{root}:
+\begin{lstlisting}
+echo "Arch-Lenovo" > /etc/hostname
+passwd
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Gestión de Redes Definitiva}
+Instalamos los demonios correspondientes para asegurar la conectividad posterior:
+\begin{lstlisting}
+pacman -S networkmanager iw wpa_supplicant
+systemctl enable NetworkManager
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Instalación y Despliegue del Cargador de Arranque (GRUB)}
+Instalamos el gestor binario de arranque y escribimos sus bloques en la partición EFI activa:
+\begin{footnotesize}
+\begin{lstlisting}
+pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+\end{lstlisting}
+\end{footnotesize}
+
+
+\item [$\bullet$] \textbf{Conclusión de la Fase Base y Reinicio}
+Salimos del aislamiento del entorno virtual, desmontamos de forma recursiva y reiniciamos el hardware:
+\begin{lstlisting}
+exit
+umount -R /mnt
+reboot
+\end{lstlisting}
+\end{enumerate}
+
+\begin{nota}[]
+    Desconectar la unidad de almacenamiento USB (pendrive) en cuanto la pantalla cambie a negro.
+\end{nota}
+
+\newpage
+
+\section{Configuración de Usuarios y Privilegios}
+Tras el inicio autónomo del disco interno, accedemos con las credenciales de \texttt{root}.
+
+\begin{enumerate}
+\item [$\bullet$] \textbf{Conexión Inicial Mediante NetworkManager}
+Invocamos la interfaz semi-gráfica para reactivar el enlace Wi-Fi sin dependencias de terceros:
+\begin{lstlisting}
+nmtui
+# Seleccionar "Activar una conexion" -> Elegir Red
+                                     -> Ingresar Password 
+                                     -> Salir.
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Creación del Usuario Personal y Permisos \texttt{sudo}}
+Instalamos la utilidad de elevación de privilegios y creamos el espacio de trabajo secundario:
+\begin{lstlisting}
+pacman -S sudo
+useradd -m -G wheel -s /bin/bash guillermo
+passwd guillermo
+\end{lstlisting}
+
+\item [$\bullet$] Para otorgar capacidades de administración al grupo del usuario, ejecutamos el editor seguro:
+\begin{lstlisting}
+EDITOR=nano visudo
+# Buscar y descomentar removiendo el '#' de la linea:
+# %wheel ALL=(ALL:ALL) ALL
+\end{lstlisting}
+Salimos de la sesión mediante \texttt{exit} e iniciamos sesión con el usuario definitivo (\texttt{guillermo}).
+\end{enumerate}
+
+\section{Interfaz Gráfica, Optimización de CPU y Entornos}
+
+\begin{enumerate}
+\item [$\bullet$] \textbf{Servidor Gráfico y Entorno de Escritorio Ligero (XFCE)}
+Instalamos el servidor de despliegue Xorg junto al entorno tradicional optimizado y el gestor de accesos interactivo:
+\begin{footnotesize}
+\begin{lstlisting}
+sudo pacman -S xorg-server xfce4 xfce4-goodies lightdm lightdm-gtk-greeter
+sudo systemctl enable lightdm
+\end{lstlisting}
+\end{footnotesize}
+
+\item [$\bullet$] \textbf{Optimización Avanzada de Energía para Procesadores Intel Celeron}
+Para regular la frecuencia de los núcleos de forma dinámica, mitigar temperaturas elevadas y prolongar los ciclos de descarga en discos mecánicos (HDD):
+\begin{lstlisting}
+sudo pacman -S tlp tlp-rdw
+sudo systemctl enable tlp.service
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Configuraciones del Entorno de Ventanas de Escritorio}
+Para forzar la correcta traducción de caracteres y mapear las señales del teclado en el ecosistema X11 al español latinoamericano:
+\begin{lstlisting}
+localectl set-x11-keymap latam
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Despliegue del Navegador Web Principal}
+Inyección del navegador nativo de código abierto:
+\begin{lstlisting}
+sudo pacman -S firefox
+\end{lstlisting}
+\end{enumerate}
+
+\section{Alternativa Futura (Gestor de Ventanas Qtile)}
+Para migrar a una maquetación en mosaico minimalista basada íntegramente en scripts dinámicos en lenguaje Python:
+
+\begin{enumerate}
+\item [$\bullet$] \textbf{Instalación de Componentes de Qtile y Terminal Acelerada}
+\begin{lstlisting}
+sudo pacman -S qtile python-psutil python-xdg python-iwlib alacritty
+\end{lstlisting}
+
+\item [$\bullet$] \textbf{Generación del Espacio de Trabajo en Python}
+Estructuramos la jerarquía del archivo \texttt{config.py} heredando la configuración por defecto proporcionada por el sistema:
+\begin{lstlisting}
+mkdir -p ~/.config/qtile
+cp /usr/share/doc/qtile/default_config.py ~/.config/qtile/config.py
+\end{lstlisting}
+\end{enumerate}
+
+\begin{nota}{}
+Tras cerrar sesión en LightDM, conmutar la sesión activa a ``Qtile'' e ingresar con las credenciales locales.
+\end{nota}

@@ -1,0 +1,313 @@
+\documentclass[12pt,openany]{book}
+% --------------------------
+% PAQUETES BÁSICOS
+% --------------------------
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{array}
+\usepackage{atbegshi} % Permite ejecutar código en cada página
+\usepackage{bookmark}
+\usepackage{background}
+\usepackage{caption}
+\usepackage{changepage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{lmodern}
+\usepackage{listings}
+\usepackage{mathtools}
+\usepackage{multicol}
+% \usepackage{physics}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+
+% --------------------------
+% ESTILO DE CAPÍTULOS
+% --------------------------
+\titleformat{\chapter}[display]
+{\normalfont\bfseries\Huge\color{azulportada}}
+{\filleft\Huge\chaptername\ \thechapter}
+{2ex}
+{\titlerule[1pt]\vspace{1ex}\filright}
+[\vspace{1ex}\titlerule]
+
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{azulportada}}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries\color{azulportada}}
+{\thesubsection}{1em}{}
+
+% --------------------------
+% ENCABEZADOS Y PIES DE PÁGINA
+% --------------------------
+\pagestyle{fancy}
+\fancyhf{}
+
+% Encabezados
+\fancyhead[LE]{\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark}}
+
+% Número de página alternado
+\fancyfoot[LE,RO]{\thepage}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\setlength{\headheight}{15pt}
+
+\setlength{\fboxrule}{1pt} % grosor del borde
+\setlength{\fboxsep}{0pt}  % espacio entre imagen y borde
+
+% --------------------------
+% COLORES PERSONALIZADOS
+% --------------------------
+\definecolor{azulportada}{RGB}{20,40,90}
+\definecolor{grisclaro}{RGB}{230,230,230}
+\definecolor{grisoscuro}{RGB}{80,80,80}
+
+\definecolor{verdeejemplo}{RGB}{220,245,228}
+\definecolor{bordeejemplo}{RGB}{70,140,90}
+
+\definecolor{azuldefinicion}{RGB}{220,235,250}
+\definecolor{bordeazuldefinicion}{RGB}{70,110,170}
+
+\definecolor{naranjaejercicio}{RGB}{255,238,214}
+\definecolor{bordeejercicio}{RGB}{210,130,50}
+
+\definecolor{rojoteorema}{RGB}{248,225,225}
+\definecolor{bordeteorema}{RGB}{150,60,60}
+
+\definecolor{turquesacorolario}{RGB}{220,245,242}
+\definecolor{bordecorolario}{RGB}{60,140,135}
+
+\definecolor{grisnota}{RGB}{240,240,240}
+\definecolor{bordenota}{RGB}{120,120,120}
+
+\definecolor{Light_blue}{RGB}{225, 235, 247} % Azul claro
+\definecolor{Light_Gray}{RGB}{230, 230, 230} % Gris claro
+\definecolor{Dark_blue}{RGB}{0, 52, 99} % Azul oscuro
+\definecolor{Light_Yellow}{RGB}{255, 250, 200} % Amarillo claro
+\definecolor{Medium_blue}{RGB}{66, 77, 128} % Azul medio
+
+
+\lstset{
+    basicstyle=\ttfamily\small, % Tipo de letra monoespaciada
+    backgroundcolor=\color{grisclaro}, % El color "grisclaro" ya lo tienes definido en tu plantilla
+    columns=flexible,
+    keepspaces=true
+}
+
+% --------------------------
+% ENTORNOS MATEMÁTICOS
+% --------------------------
+
+% Definición
+\newtcolorbox[auto counter, number within=chapter]{definicion}[1][]{
+    enhanced,
+    breakable,
+    colback=azuldefinicion,
+    colframe=bordeazuldefinicion,
+    boxrule=0.8pt,
+    arc=3mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=bordeazuldefinicion!35,
+    title=Definición~\thetcbcounter: #1
+}
+
+% Teorema
+\newtcolorbox[auto counter, number within=chapter]{teorema}[1][]{
+    enhanced,
+    breakable,
+    colback=rojoteorema,
+    colframe=bordeteorema,
+    boxrule=0.8pt,
+    arc=3mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=bordeteorema!35,
+    title=Teorema~\thetcbcounter: #1
+}
+
+% Ejemplo
+\newtcolorbox[auto counter, number within=chapter]{ejemplo}[1][]{
+    enhanced,
+    breakable,
+    colback=verdeejemplo,
+    colframe=bordeejemplo,
+    boxrule=0.8pt,
+    arc=3mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=bordeejemplo!35,
+    title=Ejemplo~\thetcbcounter: #1
+}
+
+% Observación
+\newtcolorbox[auto counter, number within=chapter]{nota}[1][]{
+    enhanced,
+    breakable,
+    colback=verdeejemplo,
+    colframe=bordeejemplo,
+    boxrule=0.8pt,
+    arc=3mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=bordeejemplo!35,
+    title=Observación~\thetcbcounter: #1
+}
+
+% --------------------------
+% CONFIGURACIÓN DE HIPERVÍNCULOS
+% --------------------------
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!50!black,
+    urlcolor=blue!70!black,
+    citecolor=blue!50!black,
+    pdftitle={Cálculo en Varias Variables},
+    pdfauthor={Guillermo Manns},
+    pdfsubject={Libro de Cálculo},
+    pdfkeywords={Cálculo, Matemática, Derivadas, Integrales}
+}
+
+% --------------------------
+% ESPACIADO
+% --------------------------
+\onehalfspacing
+
+% --------------------------
+% FONDO DE PÁGINA
+% --------------------------
+
+\newcommand{\FirstPageBackground}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[Dark_blue]
+            (current page.south west) ++(0cm, 0cm) rectangle ++(22cm, 30cm);
+        \fill[Light_blue]
+            (current page.south west) ++(2cm, 2cm) rectangle ++(17cm, 26cm);
+        \fill[Medium_blue]
+            (current page.south west) ++(4cm, 4.5cm) rectangle ++(13cm, 10.3cm);
+    \end{tikzpicture}
+}
+
+% Fondo para el resto de las páginas
+\newcommand{\OtherPageBackground}{
+    \begin{tikzpicture}[remember picture, overlay]
+        \fill[Light_Gray](current page.south west) ++(0cm, 0cm) rectangle ++(5.5cm, 30cm);
+    \end{tikzpicture}
+}
+
+% Configuración inicial del fondo
+\backgroundsetup{scale=1, color=white, opacity=1, angle=0, contents={\FirstPageBackground}}
+
+% --- fondo página 1 ---
+\AtBeginShipoutFirst{%
+  \backgroundsetup{contents={\FirstPageBackground}}%
+  \BgThispage
+}
+
+% --- resto de páginas: 2 tiene fondo, >=3 sin fondo ---
+\AtBeginShipout{%
+  \ifnum\value{page}=1\relax
+    % nada: la página 1 ya fue tratada por \AtBeginShipoutFirst
+  \else
+    \ifnum\value{page}=2\relax
+      \backgroundsetup{contents={\OtherPageBackground}}%
+      \BgThispage
+    \else
+      % desde la página 3 en adelante: forzamos fondo vacío
+      \backgroundsetup{contents={}}%
+      \BgThispage
+    \fi
+  \fi
+}
+
+
+% --------------------------
+% INICIO DEL DOCUMENTO
+% --------------------------
+\begin{document}
+% --------------------------
+% PORTADA
+% --------------------------
+\begin{titlepage}
+    \begin{center}
+        \vspace*{0.9cm}
+
+        \rule{0.8\textwidth}{1.2pt}\\[0.7cm]
+
+        {\Huge\bfseries\color{azulportada} PROGRAMACIÓN}\\[0.7cm]
+
+        {\Large\itshape\color{azulportada} Para estudiantes de ingeniería}\\[0.7cm]
+
+        {\Large\itshape - $1^{a}$ Edición -}\\[0.7cm]
+
+        % {\Large\itshape Una introducción al cálculo en varias variables}\\[1cm]
+
+        \rule{0.8\textwidth}{1.2pt}\\[1cm]
+
+        {\huge Guillermo Manns}\\[0.5cm]
+        % {\large \today}
+
+        \vspace{1cm}
+
+        % \begin{figure}[H]
+        %     \begin{center}
+        %         \includegraphics[scale=0.5]{1.png}
+        %     \end{center}
+        % \end{figure}
+
+    \end{center}
+\end{titlepage}
+
+\renewcommand{\contentsname}{Contenido}
+\tableofcontents
+
+% --------------------------
+% Versión 
+% --------------------------
+\newpage
+\begin{center}
+    \vspace{1cm}
+    \textit{Versión 1.2.3 - \today}
+\end{center}
+
+% --------------------------
+% PREFACIO 
+% --------------------------
+\chapter*{Prefacio}
+Apuntes de programación
+
+\addcontentsline{toc}{chapter}{Prefacio}
+
+% --------------------------
+% PÁGINA EN BLANCO
+% --------------------------
+\thispagestyle{empty}
+\mbox{}
+\newpage
+
+% --------------------------
+% PREFACIO 
+% --------------------------
+\chapter*{Introducción}
+
+\addcontentsline{toc}{chapter}{Introducción}
+
+\input{capitulo Bash}
+\input{capitulo Linux}
+\input{anexo Arch Linux}
+
+\end{document}

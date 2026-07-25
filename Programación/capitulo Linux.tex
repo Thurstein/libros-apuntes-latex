@@ -1,0 +1,99 @@
+\chapter{Linux}
+
+\newpage
+\section{Navegación básica}
+
+\subsection{¿Dónde estoy? ¿Qué hago aquí?}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{3.5cm}|p{11.5cm}|}
+\hline
+\textbf{Comando} & \textbf{Descripción} \\ \hline
+\lstinline!pwd! & (print working directory) Muestra la ruta del directorio actual. \\ \hline
+\lstinline!ls! & (list) Lista los archivos y directorios en el directorio actual. \\ \hline
+\lstinline!ls -l! & Lista los archivos y directorios con detalles adicionales, como permisos, propietario, tamaño y fecha de modificación. \\ \hline
+\lstinline!cd! & (change directory) Cambia el directorio actual. Por ejemplo, \lstinline!cd /home/usuario! te lleva al directorio \lstinline!/home/usuario!. \\ \hline
+\lstinline!cd ..! & Sube un nivel en la jerarquía de directorios. \\ \hline
+\lstinline!cd ~! & Te lleva al directorio home del usuario actual. \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Crear carpetas y archivos}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{6cm}|p{9cm}|}
+\hline
+\textbf{Comando} & \textbf{Descripción} \\ \hline
+\lstinline!mkdir nombre_carpeta! & Crea un nuevo directorio con el nombre especificado. \\ \hline
+\lstinline!touch nombre_archivo! & Crea un nuevo archivo vacío con el nombre especificado. \\ \hline
+\lstinline!rmdir nombre_carpeta! & Elimina un directorio vacío. \\ \hline
+\lstinline!find ruta -name nombre_archivo! & Busca un archivo o directorio con el nombre especificado en la ruta dada. \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection{Manipular archivos y directorios}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{5.5cm}|p{9.5cm}|}
+\hline
+\textbf{Comando} & \textbf{Descripción} \\ \hline
+\lstinline!>! & Redirige la salida de un comando a un archivo, sobrescribiendo su contenido. Por ejemplo, \lstinline!echo "Hola" > archivo.txt! escribirá ``Hola'' en \lstinline!archivo.txt!, reemplazando cualquier contenido previo. \\ \hline
+\lstinline!>>! & Redirige la salida de un comando a un archivo, agregando al final de su contenido. Por ejemplo, \lstinline!echo "Mundo" >> archivo.txt! agregará ``Mundo'' al final de \lstinline!archivo.txt!. \\ \hline 
+\lstinline!cat > nombre_archivo! & Crea un nuevo archivo y permite escribir contenido en él. Para finalizar la escritura, presiona \texttt{Ctrl+D}. \\ \hline
+\lstinline!echo! & Repite en pantalla lo que se escriba. Por ejemplo: \lstinline!echo ''Hola mundo'' > codigo.txt!  \\ \hline
+\lstinline!mv origen destino! & Mueve un archivo o directorio desde la ubicación de origen a la ubicación de destino. También se puede usar para renombrar archivos o directorios. \\ \hline
+\lstinline!cp origen destino! & Copia un archivo o directorio desde la ubicación de origen a la ubicación de destino. \\ \hline
+\lstinline!rm nombre_archivo! & Elimina el archivo especificado. \\ \hline
+\lstinline!rm -r nombre_carpeta! & Elimina el directorio especificado y todo su contenido de manera recursiva. \\ \hline
+\lstinline!clear! & Limpia la pantalla de la terminal, eliminando todo el contenido visible. \\ \hline
+\lstinline!less nombre_archivo! & Muestra el contenido de un archivo de texto de manera paginada, permitiendo desplazarse hacia arriba y hacia abajo. \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{nota}[]
+    En Arch Linux requiere instalar el paquete \texttt{less} con \texttt{sudo pacman -S less}.
+\end{nota}
+
+\newpage
+\section{Edición de texto}
+
+\subsection{Editor nano}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{5.5cm}|p{9.5cm}|}
+\hline
+\textbf{Comando} & \textbf{Descripción} \\ \hline
+\lstinline!nano! & Editor de texto en consola. Se debe instalar mediante: \lstinline!sudo pacman -S nano! \\ \hline
+\end{tabular}
+\end{center}
+
+\begin{ejemplo}[script básico]
+\begin{lstlisting}
+#!/bin/bash
+echo ''Hola usuario''
+echo ''Tu sistema lleva encendido:''
+uptime
+\end{lstlisting}
+\end{ejemplo}
+
+\subsection{Permisos de ejecución}
+
+\subsection{Procesos}
+
+\subsection{Tuberías}
+
+\newpage
+\section{Gestión de usuarios, permisos y redes}
+
+\newpage
+\section{Gestión de almacenamiento}
+
+\newpage
+\section{Gestión de procesos y servicios}
+
+\newpage
+\section{Redirección y automatización básica}

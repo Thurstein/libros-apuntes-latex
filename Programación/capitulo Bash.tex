@@ -1,0 +1,155 @@
+\chapter{Bash}
+
+\newpage
+\section{Fundamentos del lenguaje Bash}
+
+\subsection{El ``Shebang'' y la salida estándar}
+
+Todo script de Bash debe comenzar con una línea especial llamada Shebang ($\#!$). Esta línea le indica al sistema qué intérprete debe usar para ejecutar el código que viene a continuación. Para Bash, la ruta absoluta estándar es /bin/bash.
+
+\begin{ejemplo}[script básico]
+\begin{lstlisting}
+#!/bin/bash
+# Esto es un comentario en Bash
+
+echo ''Comenzando el curso de Bash''
+\end{lstlisting}
+\end{ejemplo}
+
+Los scripts deben ser guardados en formato \texttt{.sh}
+
+\subsection{Variables y la regla del ''espacio prohibido''}
+
+En Bash, puedes crear variables para almacenar datos, pero existe una regla de oro que confunde a muchos programadores que vienen de otros lenguajes: no debe haber absolutamente ningún espacio alrededor del signo igual (=) en la asignación.
+
+Si pones un espacio, Bash pensará que el nombre de tu variable es un comando que intentas ejecutar y fallará. Por defecto, todas las variables en Bash se tratan como cadenas de texto (strings). Para acceder al valor que guardaste en la variable, debes anteponer el símbolo de dólar (\$).
+
+\begin{ejemplo}[script básico]
+\begin{lstlisting}
+#!/bin/bash
+
+# Correcto (sin espacios)
+lenguaje=``Bash''
+version=5
+
+# Llamar a la variable usando $
+echo ``Estamos aprendiendo $lenguaje''
+\end{lstlisting}
+\end{ejemplo}
+
+\newpage
+
+\subsection{Comillas simples vs. dobles y expansión}
+
+En la clase anterior viste cómo usar el símbolo \$ para obtener el valor de una variable dentro de la salida estándar. Sin embargo, Bash interpreta este símbolo de manera diferente dependiendo del tipo de comillas que lo rodeen.
+
+Comillas dobles (``...''): Son comillas ``débiles''. Permiten lo que se conoce como expansión de variables. Si escribes \lstinline!$variable! dentro de comillas dobles, Bash lo leerá, lo reconocerá y lo reemplazará por su valor real.
+
+Comillas simples (`...'): Son comillas ``fuertes'' o estrictamente literales. Todo lo que esté dentro de ellas se interpreta como texto puro. Si escribes \lstinline!$variable! dentro de comillas simples, Bash ignorará el símbolo de dólar e imprimirá literalmente el texto ``\lstinline!$variable!''.
+
+\begin{ejemplo}[script básico]
+\begin{lstlisting}
+#!/bin/bash
+
+# Definimos una variable
+sistema="Arch Linux"
+
+# Expansion de la variable
+echo ``Estoy ejecutando codigo en $sistema''
+
+# Texto literal sin expansion
+echo `Estoy ejecutando codigo en $sistema'
+\end{lstlisting}
+\end{ejemplo}
+
+\newpage
+
+\subsection{Captura de entrada del usuario (read)}
+
+Para que un script de Bash reciba información directamente del usuario que lo está ejecutando, usamos el comando incorporado read. Cuando Bash encuentra este comando, pausa la ejecución del script y espera a que el usuario escriba algo en la terminal y presione Enter.
+
+Lo que el usuario escribe se guarda automáticamente en la variable que indiques después del comando read.
+
+Un truco muy útil: en lugar de usar un echo para hacer la pregunta y luego un read en la siguiente línea, read tiene una opción (un flag) -p (de prompt) que te permite imprimir el mensaje y capturar la variable en la misma línea.
+
+\begin{ejemplo}[script básico]
+\begin{lstlisting}
+#!/bin/bash
+
+# Metodo tradicional
+echo "Escribe una palabra:"
+read palabra1
+echo "Escribiste: $palabra1"
+
+# Metodo mas limpio con -p
+read -p "Escribe otra palabra: " palabra2
+echo "Tambien escribiste: $palabra2"
+\end{lstlisting}
+\end{ejemplo}
+
+\newpage
+
+\subsection{Argumentos posicionales (\$1, \$2, \$@)}
+
+Hasta ahora, le has pedido datos al usuario con read mientras el script está en ejecución. Pero en Bash, es muy común pasarle la información al script en el mismo momento en que lo ejecutas desde la terminal. Estos se llaman argumentos posicionales.
+
+Bash asigna variables automáticas a las palabras que escribes después del nombre del script:
+
+\$0: Contiene el nombre del script mismo.
+
+\$1, \$2, \$3, ... : Contienen el primer, segundo, tercer argumento, respectivamente.
+
+\$@: Representa todos los argumentos que se le pasaron.
+
+\$\#: Contiene el número total de argumentos recibidos.
+
+\begin{ejemplo}[script básico]
+\begin{lstlisting}
+#!/bin/bash
+
+# Se ejecuta asi en la terminal: ./script.sh Arch Linux
+echo "El script en ejecucion es: $0"
+echo "El primer argumento es: $1"
+echo "El segundo argumento es: $2"
+echo "Me has pasado un total de $# argumentos."
+echo "Todos los argumentos juntos son: $@"
+\end{lstlisting}
+\end{ejemplo}
+
+\newpage
+
+\section{Operaciones y Control de Flujo}
+
+\subsection{Operaciones aritméticas básicas}
+
+En Bash, todas las variables son tratadas como texto (strings) por defecto. Si intentas hacer resultado=``5 + 5'' y lo imprimes, Bash literalmente mostrará 5 + 5.
+
+Para que el intérprete evalúe una expresión matemática (suma, resta, multiplicación, división entera), debes usar la Expansión Aritmética. Esto se logra encerrando la operación entre dobles paréntesis precedidos por un signo de dólar: \$\lstinline!(( expresion ))!.
+
+Un detalle muy cómodo: dentro de los dobles paréntesis, no necesitas usar el símbolo \$ para llamar a las variables. Bash ya sabe que estás en un contexto matemático.
+
+(Nota: Bash nativo solo trabaja con números enteros. Para cálculos con decimales o límites matemáticos más complejos, se suele llamar a herramientas externas como \lstinline!bc!, \lstinline!awk! o usar Python, pero para la lógica del script, los enteros suelen bastar).
+
+\begin{ejemplo}[script básico]
+\begin{lstlisting}
+#!/bin/bash
+
+x=10
+y=3
+
+# Suma
+suma=$(( x + y ))
+
+# Multiplicacion
+multiplicacion=$(( x * y ))
+
+# Division entera (trunca los decimales)
+division=$(( x / y ))
+
+# Modulo (Resto de la division)
+modulo=$(( x % y ))
+
+echo "La suma es: $suma"
+echo "La division entera es: $division"
+\end{lstlisting}
+\end{ejemplo}

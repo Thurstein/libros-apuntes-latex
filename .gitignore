@@ -1,0 +1,32 @@
+# Archivos temporales generales de LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(k)
+*.pdfsync
+
+# Archivos de bibliografía
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# Archivos de índices y glosarios
+*.idx
+*.ind
+*.ilg
+*.glo
+*.gls
+*.glg
+*.ist
+
+# Archivos de VSCodium/VSCode (Opcional, pero recomendado)
+.vscode/
+
+# Archivos del OS
+desktop.ini
+.DS_Store
