@@ -1,6 +1,123 @@
 \chapter{Linux}
 
 \newpage
+
+\section{Directorios Linux}
+
+\begin{lstlisting}
+/
+├── bin
+├── boot
+├── dev
+├── etc
+├── home
+├── lib
+├── media
+├── mnt
+├── opt
+├── sbin
+├── tmp
+├── usr
+└── var
+\end{lstlisting}
+% │   ├── bin
+% │   └── lib
+\subsection{Directorio raíz}
+\begin{lstlisting}
+/
+\end{lstlisting}
+Es el punto de inicio del sistema de archivos de Linux. Aquí se encuentran todos los demás directorios del sistema.
+
+\subsection{Binarios y comandos esenciales}
+\begin{lstlisting}
+/bin
+\end{lstlisting}
+Aquí se encuentran los archivos ejecutables (binarios) que son esenciales para el funcionamiento del sistema. Estos archivos incluyen comandos básicos utilizados por los usuarios y programas del sistema.
+
+\subsection{Directorios personales de los usuarios.}
+\begin{lstlisting}
+/home
+\end{lstlisting}
+Cada usuario tiene un subdirectorio aquí (por ejemplo, /home/user).
+
+\newpage
+
+\subsection{Directorio boot}
+\begin{lstlisting}
+/boot
+\end{lstlisting}
+Contiene los ejecutables del Kernel y todos los archivos necesarios para ejecutar el sistema.
+
+\subsection{Directorio dev}
+\begin{lstlisting}
+/dev
+\end{lstlisting}
+contiene archivos especiales que brindan acceso a dispositivos de hardware.
+
+\subsection{Directorio etc}
+\begin{lstlisting}
+/etc
+\end{lstlisting}
+Contiene los archivos de configuración del sistema, también puede almacenar archivos de configuración de aplicaciones instaladas.
+
+\subsection{Directorio lib}
+\begin{lstlisting}
+/lib
+\end{lstlisting}
+Contiene todas las librerías compartidas, éstas son necesarias para la ejecución de binarios.
+
+\subsection{Directorio media}
+\begin{lstlisting}
+/media
+\end{lstlisting}
+En este directorio se montan los dispositivos de media extraíbles (como USB).
+
+\subsection{Directorio mount}
+\begin{lstlisting}
+/mnt
+\end{lstlisting}
+Sirve para montar sistemas de archivos temporalmente. Está pensado para que el administrador del sistema monte dispositivos de forma transitoria.
+
+\subsection{Directorio opt}
+\begin{lstlisting}
+/opt
+\end{lstlisting}
+Aquí se almacenan archivos de aplicaciones externas (de terceros). Los programas instalados en /opt suelen tener su propia estructura de directorios interna.
+
+
+\subsection{Directorio root}
+\begin{lstlisting}
+/root
+\end{lstlisting}
+Este es el directorio personal del super usuario (administrador del sistema).
+
+\subsection{Directorio sbin}
+\begin{lstlisting}
+/sbin
+\end{lstlisting}
+Este directorio contiene los binarios del sistema. Cumple la misma función que /bin, pero en este caso para el super usuario.
+
+\subsection{Directorio de archivos temporales}
+\begin{lstlisting}
+/tmp
+\end{lstlisting}
+Aquí es donde el sistema operativo y otros programas almacenan sus archivos temporales. Al reiniciar el sistema se vacía por completo.
+
+\subsection{Directorio user}
+\begin{lstlisting}
+/usr
+\end{lstlisting}
+Este directorio contiene librerías, ejecutables, recursos compartidos, pero que no son esenciales para el arranque del sistema, pero que sí son necesarios para su funcionamiento correcto.
+
+\subsection{Directorio var}
+\begin{lstlisting}
+/var
+\end{lstlisting}
+Este directorio contiene archivos variables, es decir,que se van modificando continuamente. Por ejemplo: archivos .log (eventos del sistema).
+
+
+\newpage
+
 \section{Navegación básica}
 
 \subsection{¿Dónde estoy? ¿Qué hago aquí?}

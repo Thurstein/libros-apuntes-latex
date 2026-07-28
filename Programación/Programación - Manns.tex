@@ -29,6 +29,9 @@
 \usepackage{tocloft}
 \usepackage{xcolor}
 \usepackage[most]{tcolorbox}
+\usepackage{pmboxdraw} % Paquete para dibujar cajas
+
+
 
 % --------------------------
 % ESTILO DE CAPÍTULOS
@@ -103,11 +106,14 @@
 
 \lstset{
     basicstyle=\ttfamily\small, % Tipo de letra monoespaciada
-    backgroundcolor=\color{grisclaro}, % El color "grisclaro" ya lo tienes definido en tu plantilla
+    backgroundcolor=\color{grisclaro}, % El color "grisclaro" ya lo tienes definido
     columns=flexible,
-    keepspaces=true
+    keepspaces=true, 
+    literate={├}{\textSFviii}1
+             {─}{\textSFx}1
+             {└}{\textSFii}1
+             {│}{\textSFxi}1
 }
-
 % --------------------------
 % ENTORNOS MATEMÁTICOS
 % --------------------------
@@ -306,8 +312,11 @@ Apuntes de programación
 
 \addcontentsline{toc}{chapter}{Introducción}
 
-\input{capitulo Bash}
 \input{capitulo Linux}
+
+\input{capitulo Bash}
+
 \input{anexo Arch Linux}
+
 
 \end{document}
