@@ -1,7 +1,220 @@
-\chapter{Límites y continuidad}
+\chapter{Números Reales}
+\section{Introducción}
+Los números reales ($\mathbb{R}$) constituyen la estructura fundamental del análisis matemático y del cálculo. Se caracterizan axiomáticamente como un \textbf{cuerpo ordenado y completo}. En este apunte abordaremos los dos primeros pilares: los \textbf{axiomas de cuerpo} (propiedades algebraicas) y los \textbf{axiomas de orden} (relaciones de desigualdad).
+
+\section{Axiomas de Cuerpo}
+En el conjunto $\mathbb{R}$ se definen dos operaciones binarias: la adición ($+$) y la multiplicación ($\cdot$). El sistema $(\mathbb{R}, +, \cdot)$ satisface las siguientes propiedades para cualesquiera $a, b, c \in \mathbb{R}$:
+
+\subsection{Axiomas de la Adición}
+\begin{enumerate}[label=\textbf{A.\arabic*}]
+    \item \textbf{Clausura y Conmutatividad:} $a + b = b + a \in \mathbb{R}$.
+    \item \textbf{Asociatividad:} $(a + b) + c = a + (b + c)$.
+    \item \textbf{Elemento Neutro Aditivo:} Existe un único elemento $0 \in \mathbb{R}$ tal que $a + 0 = a$ para todo $a \in \mathbb{R}$.
+    \item \textbf{Elemento Opuesto (Inverso Aditivo):} Para cada $a \in \mathbb{R}$, existe un único elemento $-a \in \mathbb{R}$ tal que $a + (-a) = 0$.
+\end{enumerate}
+
+\subsection{Axiomas de la Multiplicación}
+\begin{enumerate}[label=\textbf{M.\arabic*}]
+    \item \textbf{Conmutatividad:} $a \cdot b = b \cdot a$.
+    \item \textbf{Asociatividad:} $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+    \item \textbf{Elemento Neutro Multiplicativo:} Existe un único elemento $1 \in \mathbb{R}$ ($1 \neq 0$) tal que $a \cdot 1 = a$ para todo $a \in \mathbb{R}$.
+    \item \textbf{Elemento Recíproco (Inverso Multiplicativo):} Para cada $a \in \mathbb{R} \setminus \{0\}$, existe un único elemento $a^{-1} \in \mathbb{R}$ tal que $a \cdot a^{-1} = 1$.
+\end{enumerate}
+
+\subsection{Axioma de Distributividad}
+\begin{enumerate}[label=\textbf{D.\arabic*}]
+    \item \textbf{Distributividad del Producto respecto a la Suma:} 
+    \[
+    a \cdot (b + c) = a \cdot b + a \cdot c
+    \]
+\end{enumerate}
+
+\section{Axiomas de Orden}
+
+La relación de orden en $\mathbb{R}$, representada por el símbolo ``$<$'', satisface los siguientes axiomas:
+
+\begin{enumerate}[label=\textbf{O.\arabic*}]
+    \item \textbf{Ley de Tricotomía:} Dados cualesquiera $a,b\in\mathbb{R}$, se cumple exactamente una de las siguientes afirmaciones:
+    \[
+    a<b,\qquad a=b,\qquad b<a.
+    \]
+
+    \item \textbf{Transitividad:} Si
+    \[
+    a<b \quad \text{y} \quad b<c,
+    \]
+    entonces
+    \[
+    a<c.
+    \]
+
+    \item \textbf{Compatibilidad con la suma:} Si
+    \[
+    a<b,
+    \]
+    entonces, para todo $c\in\mathbb{R}$,
+    \[
+    a+c<b+c.
+    \]
+
+    \item \textbf{Compatibilidad con el producto:} Si
+    \[
+    a<b
+    \]
+    y
+    \[
+    c>0,
+    \]
+    entonces
+    \[
+    ac<bc.
+    \]
+
+    Si $c<0$, la desigualdad cambia de sentido:
+    \[
+    ac>bc.
+    \]
+\end{enumerate}
+
+% \section{Axiomas de Orden}
+% Para formalizar la relación de orden ``menor que'' ($<$), postulamos la existencia de un subconjunto no vacío $\mathbb{R}^+ \subset \mathbb{R}$ denominado el conjunto de los \textbf{números reales positivos}, el cual satisface:
+
+% \begin{enumerate}[label=\textbf{O.\arabic*}]
+%     \item \textbf{Ley de Tricotomía:} Para todo $a \in \mathbb{R}$, se cumple exactamente una de las siguientes tres afirmaciones:
+%     \[
+%     a \in \mathbb{R}^+ \quad \lor \quad a = 0 \quad \lor \quad -a \in \mathbb{R}^+
+%     \]
+%     \item \textbf{Clausura para la Suma:} Si $a, b \in \mathbb{R}^+$, entonces $(a + b) \in \mathbb{R}^+$.
+%     \item \textbf{Clausura para el Producto:} Si $a, b \in \mathbb{R}^+$, entonces $(a \cdot b) \in \mathbb{R}^+$.
+% \end{enumerate}
+
+\begin{definicion}[Relación de Orden]
+Para cualesquiera $a, b \in \mathbb{R}$:
+\begin{itemize}
+    \item $a < b \iff b - a \in \mathbb{R}^+$
+    \item $a > 0 \iff a \in \mathbb{R}^+$
+    \item $a \le b \iff (a < b \lor a = b)$
+\end{itemize}
+\end{definicion}
+
+\section{Resumen de Propiedades Derivadas}
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabular}{lll}
+\hline
+\textbf{Propiedad / Teorema} & \textbf{Formulación Matemática} & \textbf{Axiomas Clave Utilizados} \\
+\hline
+Anulación por cero & $a \cdot 0 = 0, \quad \forall a \in \mathbb{R}$ & D.1, A.3, A.4 \\
+Leyes de signos & $(-a)b = -(ab) \quad \text{y} \quad (-a)(-b) = ab$ & D.1, A.4 \\
+Transitividad & Si $a < b$ y $b < c \implies a < c$ & O.2 \\
+Monotonía de la suma & Si $a < b \implies a + c < b + c, \quad \forall c \in \mathbb{R}$ & O.1, A.2 \\
+Monotonía del producto & Si $a < b$ y $c > 0 \implies a \cdot c < b \cdot c$ & O.3 \\
+Inversión por negativo & Si $a < b$ y $c < 0 \implies a \cdot c > b \cdot c$ & O.1, O.3 \\
+Cuadrado no negativo & $a^2 \ge 0, \quad \forall a \in \mathbb{R} \quad (1 > 0)$ & O.1, O.3 \\
+\hline
+\end{tabular}
+\caption{Principales consecuencias algebraicas y de orden en $\mathbb{R}$.}
+\end{table}
+
+\section{Ejemplos Resueltos}
+
+\begin{ejemplo}
+Demostrar que $a \cdot 0 = 0$ para todo $a \in \mathbb{R}$.
+\end{ejemplo}
+
+\begin{proof}
+Procedemos por pasos justificados axiomáticamente:
+\begin{enumerate}
+    \item Por axioma del neutro aditivo A.3, se tiene que $0 + 0 = 0$.
+    \item Multiplicando por $a \in \mathbb{R}$: $a \cdot (0 + 0) = a \cdot 0$.
+    \item Aplicando la propiedad distributiva D.1 al lado izquierdo:
+    \[
+    a \cdot 0 + a \cdot 0 = a \cdot 0
+    \]
+    \item Por neutro aditivo A.3 en el lado derecho:
+    \[
+    a \cdot 0 + a \cdot 0 = a \cdot 0 + 0
+    \]
+    \item Sumando $-(a \cdot 0)$ a ambos miembros y usando asociatividad A.2 e inverso aditivo A.4:
+    \begin{align*}
+        (a \cdot 0 + a \cdot 0) + (-(a \cdot 0)) &= (a \cdot 0 + 0) + (-(a \cdot 0)) \\
+        a \cdot 0 + (a \cdot 0 + (-(a \cdot 0))) &= a \cdot 0 + (0 + (-(a \cdot 0))) \\
+        a \cdot 0 + 0 &= a \cdot 0 + (-(a \cdot 0)) \\
+        a \cdot 0 &= 0 \qedhere
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{ejemplo}
+Demostrar que si $a < b$ y $c < 0$, entonces $ac > bc$.
+\end{ejemplo}
+
+\begin{proof}
+Utilizaremos la definición de orden y los axiomas de orden:
+\begin{enumerate}
+    \item Por definición de la relación de orden, $a < b \iff (b - a) \in \mathbb{R}^+$.
+    \item Por definición, $c < 0 \iff 0 - c \in \mathbb{R}^+ \iff -c \in \mathbb{R}^+$.
+    \item Por el axioma O.3 (clausura del producto en $\mathbb{R}^+$), el producto pertenece a $\mathbb{R}^+$:
+    \[
+    (b - a) \cdot (-c) \in \mathbb{R}^+
+    \]
+    \item Aplicando distributividad D.1 y las leyes de los signos en $\mathbb{R}$:
+    \[
+    b(-c) - a(-c) \in \mathbb{R}^+ \iff -bc + ac \in \mathbb{R}^+ \iff ac - bc \in \mathbb{R}^+
+    \]
+    \item Por definición de la relación $<$, que $ac - bc \in \mathbb{R}^+$ equivale a:
+    \[
+    ac > bc \qedhere
+    \]
+\end{enumerate}
+\end{proof}
 
 \newpage
-\section{Definición de límite}
 
+\section{Ejercicios Propuestos:}
 
+\begin{enumerate}
+    \item \textbf{Ecuaciones de primer grado y neutralidad:}\\
+    Al resolver la ecuación lineal $3x + 7 = 7$, un estudiante afirma que $3x = 0$ ``porque el $7$ pasa restando''. 
+    \begin{enumerate}
+        \item Justifique este paso identificando los axiomas necesarios que se den aplicar.
+        \item Concluya el valor de $x$ paso a paso aplicando los axiomas necesarios.
+    \end{enumerate}
 
+    \item \textbf{Simplificación de expresiones racionales y condición de existencia:}\\
+    Dada la expresión algebraica:
+    \[
+    A(x) = \frac{x^2 - 4}{x - 2}
+    \]
+    \begin{enumerate}
+        \item Indique para qué valores de $x$ está definido el inverso multiplicativo $(x - 2)^{-1}$.
+        \item Factorice el numerador y aplique los axiomas para simplificar $A(x)$ indicando sus restricciones.
+    \end{enumerate}
+
+    \item \textbf{Distribución y factorización de potencia de un producto:}\\
+    La regla del producto de una potencia:
+    $$(a \cdot b)^2 = a^2 \cdot b^2$$
+    , se puede demostrar mediante:
+    \[
+    (a \cdot b)^2 = (a \cdot b) \cdot (a \cdot b) = a \cdot [b \cdot (a \cdot b)] = a \cdot [(b \cdot a) \cdot b] = a \cdot [(a \cdot b) \cdot b] = (a \cdot a) \cdot (b \cdot b) = a^2 \cdot b^2
+    \]
+    Identifique los axiomas que se aplicaron en cada paso del desarrollo.
+
+    \newpage
+
+    \item \textbf{Análisis de rangos y cotas en ingeniería (Desigualdades):}\\
+    En un proceso de diseño estructural se requiere garantizar que la suma de dos áreas representadas por $x^2$ y $y^2$ cumpla con la cota inferior $x^2 + y^2 \ge 2xy$ para asegurar la estabilidad del sistema.
+    \begin{enumerate}
+        \item Utilice el hecho de que todo cuadrado en $\mathbb{R}$ es no negativo, es decir, $(x - y)^2 \ge 0$, para obtener la desigualdad deseada mediante operaciones de adición y distributividad.
+        \item Evalúe numéricamente la desigualdad para $x = -3$ y $y = 4$ y verifique que la cota se satisface.
+    \end{enumerate}
+
+    \item \textbf{Resolución de inecuaciones y signo del inverso:}\\
+    Dada la inecuación $\frac{1}{x} < 2$ con $x > 0$:
+    \begin{enumerate}
+        \item Justifique por qué es válido multiplicar ambos lados por $x$ sin cambiar el sentido de la desigualdad, citando la propiedad del signo del inverso / multiplicación por un número positivo.
+        \item Determine el conjunto solución para $x$.
+    \end{enumerate}
+\end{enumerate}
