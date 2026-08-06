@@ -1,0 +1,784 @@
+\chapter{Funciones vectoriales}
+
+\newpage
+\section{Funciones vectoriales}
+
+\subsection{Definición de funciones vectoriales}
+
+\begin{definicion}[Función vectorial]
+    Una \textbf{función vectorial} es una función cuya salida es un vector. En otras palabras, a cada valor de la variable independiente le corresponde un vector del espacio.
+\end{definicion}
+
+Se escribe como
+
+\[
+\mathbf{r}:D\subseteq\mathbb{R}\longrightarrow\mathbb{R}^{n},
+\]
+
+donde:
+
+\begin{itemize}
+    \item $D$ es el dominio de la función.
+    \item $\mathbb{R}^{n}$ es el espacio donde se encuentran los vectores de salida.
+\end{itemize}
+
+Una función vectorial puede expresarse mediante sus funciones componentes:
+
+\[
+\mathbf{r}(t)=\left(x(t),\,y(t),\,z(t)\right),
+\]
+
+o, de forma equivalente,
+
+\[
+\mathbf{r}(t)=x(t)\mathbf{i}+y(t)\mathbf{j}+z(t)\mathbf{k}.
+\]
+
+En dos dimensiones basta considerar las dos primeras componentes.
+
+
+\begin{ejercicio}[evaluar función vectorial]
+Dada
+
+\[
+\mathbf{r}(t)=\left(t+1,2t-3\right),
+\]
+
+calcule $\mathbf{r}(2)$.
+
+\textbf{Solución}
+
+\[
+\mathbf{r}(2)
+=
+(3,1).
+\]
+\end{ejercicio}
+
+\newpage
+
+\subsection{Interpretación geométrica}
+
+Cada valor del parámetro $t$ determina un punto del espacio.
+
+Cuando el parámetro varía continuamente, el extremo del vector recorre una trayectoria denominada \textbf{curva parametrizada}.
+
+\[
+t
+\quad\longrightarrow\quad
+(x(t),y(t),z(t))
+\]
+
+Es importante notar que la variable independiente suele llamarse \emph{parámetro}, ya que describe el movimiento sobre la curva y no necesariamente representa una coordenada espacial.
+
+\begin{ejemplo}[Recta]
+Sea
+
+\[
+\mathbf{r}(t)=\left(2+t,\;1+3t\right).
+\]
+
+Calculamos algunos puntos.
+
+\[
+\begin{aligned}
+t=0&\Rightarrow (2,1),\\
+t=1&\Rightarrow (3,4),\\
+t=2&\Rightarrow (4,7).
+\end{aligned}
+\]
+
+Estos puntos pertenecen a una recta del plano.
+\end{ejemplo}
+
+
+\begin{ejemplo}[Circunferencia]
+
+Considere la función
+
+\[
+\mathbf{r}(t)=\left(\cos t,\sin t\right).
+\]
+
+Algunos valores son
+
+\[
+\begin{array}{c|c}
+t & \mathbf{r}(t)\\
+\hline
+0&(1,0)\\
+\dfrac{\pi}{2}&(0,1)\\
+\pi&(-1,0)\\
+\dfrac{3\pi}{2}&(0,-1)
+\end{array}
+\]
+
+Los puntos obtenidos recorren la circunferencia unitaria.
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[Parábola]
+
+Sea
+
+\[
+\mathbf{r}(t)=\left(t,t^{2}\right).
+\]
+
+Para algunos valores del parámetro:
+
+\[
+\begin{array}{c|c}
+t & \mathbf{r}(t)\\
+\hline
+-2&(-2,4)\\
+-1&(-1,1)\\
+0&(0,0)\\
+1&(1,1)\\
+2&(2,4)
+\end{array}
+\]
+
+La trayectoria corresponde a la parábola
+
+\[
+y=x^{2}.
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[Hélice]
+Considere
+\[
+\mathbf{r}(t)=\left(\cos t,\sin t,t\right).
+\]
+En este caso:
+\begin{itemize}
+    \item las componentes $x$ e $y$ describen una circunferencia;
+    \item la componente $z$ aumenta linealmente;
+    \item la trayectoria es una hélice.
+\end{itemize}
+\end{ejemplo}
+
+\newpage
+
+\subsection{Operaciones con funciones vectoriales}
+
+\begin{definicion}[Suma]
+Sean:
+\begin{itemize}
+    \item $\mathbf{u}(t)=\left(u_{1}(t),u_{2}(t)\right)$
+    \item $\mathbf{v}(t)=\left(v_{1}(t),v_{2}(t)\right)$
+\end{itemize} 
+Entonces:
+\[
+\mathbf{u}(t)+\mathbf{v}(t)
+=
+\left(
+u_{1}+v_{1},
+u_{2}+v_{2}
+\right).
+\]
+\end{definicion}
+
+\begin{definicion}[Multiplicación por un escalar]
+Sean $\mathbf{u}(t)=\left(u_{1}(t),u_{2}(t)\right)$ y $k \in \mathbb{R}$. Entonces:
+\[
+k\mathbf{u}(t)
+=
+\left(
+ku_{1},
+ku_{2}
+\right).
+\]
+\end{definicion}
+
+% \newpage
+\section{Dominio de funciones vectoriales}
+
+\begin{definicion}[Dominio de una función vectorial]
+\begin{itemize}
+    \item El \textbf{dominio} de una función vectorial es el conjunto de todos los valores del parámetro para los cuales \textbf{todas} sus funciones componentes están definidas.
+    \item Si:
+        \[
+        \mathbf{r}(t)=\left(f(t),g(t),h(t)\right),
+        \]
+        , entonces su dominio es:
+        \[
+        \operatorname{Dom}(\mathbf{r})
+        =
+        \operatorname{Dom}(f)
+        \cap
+        \operatorname{Dom}(g)
+        \cap
+        \operatorname{Dom}(h).
+        \]
+        \item Es decir, el dominio de la función vectorial corresponde a la \textbf{intersección de los dominios} de cada una de sus componentes.
+\end{itemize}
+\end{definicion}
+
+
+\subsection{¿Por qué se utiliza la intersección?}
+
+Para que la función vectorial esté definida en un determinado valor de $t$, es necesario que \textbf{todas} sus componentes puedan evaluarse simultáneamente.
+
+Si una sola componente no está definida para un cierto valor del parámetro, entonces la función vectorial completa tampoco está definida en dicho valor.
+
+\begin{ejemplo}[]
+
+Considere
+
+\[
+\mathbf{r}(t)=
+\left(
+\sqrt{t},
+\ln t,
+t^2
+\right).
+\]
+
+
+Analizando cada componente:
+
+\begin{itemize}
+    \item $\sqrt{t}$ exige
+    \[
+    t\ge0.
+    \]
+
+    \item $\ln t$ exige
+    \[
+    t>0.
+    \]
+
+    \item $t^2$ está definida para todo número real.
+\end{itemize}
+
+Por lo tanto,
+
+\[
+[0,\infty)
+\cap
+(0,\infty)
+\cap
+\mathbb{R}
+=
+(0,\infty).
+\]
+
+Así,
+
+\[
+\boxed{\operatorname{Dom}(\mathbf{r})=(0,\infty).}
+\]
+
+\end{ejemplo}
+
+\textbf{Procedimiento para determinar el dominio}\\
+
+Para encontrar el dominio de una función vectorial es recomendable seguir los siguientes pasos:
+
+\begin{enumerate}
+    \item Identificar cada función componente.
+    \item Determinar el dominio de cada componente por separado.
+    \item Calcular la intersección de todos los dominios.
+\end{enumerate}
+
+Este procedimiento garantiza que todas las componentes puedan evaluarse simultáneamente.
+
+\newpage 
+
+\begin{ejercicio}[]
+
+Determine el dominio de
+
+\[
+\mathbf{r}(t)=
+\left(
+t^2,
+e^t,
+\sin t
+\right).
+\]
+
+\textbf{Solución}
+
+Cada componente está definida para todo número real.
+
+\[
+\operatorname{Dom}(t^2)=\mathbb{R},
+\]
+
+\[
+\operatorname{Dom}(e^t)=\mathbb{R},
+\]
+
+\[
+\operatorname{Dom}(\sin t)=\mathbb{R}.
+\]
+
+Por lo tanto,
+
+\[
+\boxed{\operatorname{Dom}(\mathbf{r})=\mathbb{R}.}
+\]
+
+\end{ejercicio}
+
+\begin{ejercicio}[]
+
+Determine el dominio de
+
+\[
+\mathbf{r}(t)=
+\left(
+\sqrt{t},
+\frac1{t-1}
+\right).
+\]
+
+\textbf{Solución}
+
+Para la primera componente,
+
+\[
+t\ge0.
+\]
+
+Para la segunda,
+
+\[
+t\neq1.
+\]
+
+La intersección es
+
+\[
+[0,\infty)\setminus\{1\}.
+\]
+
+Por tanto,
+
+\[
+\boxed{\operatorname{Dom}(\mathbf{r})=[0,\infty)\setminus\{1\}.}
+\]
+
+\end{ejercicio}
+
+\begin{ejercicio}[]
+
+Determine el dominio de
+
+\[
+\mathbf{r}(t)=
+\left(
+\ln(t-2),
+\sqrt{5-t}
+\right).
+\]
+
+\textbf{Solución}
+
+Primera componente:
+
+\[
+t>2.
+\]
+
+Segunda componente:
+
+\[
+5-t\ge0
+\quad\Longrightarrow\quad
+t\le5.
+\]
+
+La intersección es
+
+\[
+(2,5].
+\]
+
+Luego,
+
+\[
+\boxed{\operatorname{Dom}(\mathbf{r})=(2,5].}
+\]
+
+\end{ejercicio}
+
+\begin{ejercicio}[]
+
+Determine el dominio de
+
+\[
+\mathbf{r}(t)=
+\left(
+\frac1{t^2-9},
+\sqrt{t+4},
+\ln(t)
+\right).
+\]
+
+\textbf{Solución}
+
+Analizando cada componente:
+
+\[
+\frac1{t^2-9}
+\quad\Rightarrow\quad
+t\neq-3,\;t\neq3.
+\]
+
+\[
+\sqrt{t+4}
+\quad\Rightarrow\quad
+t\ge-4.
+\]
+
+\[
+\ln(t)
+\quad\Rightarrow\quad
+t>0.
+\]
+
+La condición más restrictiva es
+
+\[
+t>0,
+\]
+
+pero además debe cumplirse
+
+\[
+t\neq3.
+\]
+
+Así,
+
+\[
+\boxed{\operatorname{Dom}(\mathbf{r})=(0,\infty)\setminus\{3\}.}
+\]
+\end{ejercicio}
+
+\section*{Ejercicios Propuestos}
+
+Determine el dominio de las siguientes funciones vectoriales.
+
+\begin{enumerate}
+    \item
+    \[
+    \mathbf{r}(t)=
+    \left(
+    \sqrt{t},
+    t^3,
+    \cos t
+    \right).
+    \]
+
+    \item
+    \[
+    \mathbf{r}(t)=
+    \left(
+    \ln(t+1),
+    \sqrt{4-t}
+    \right).
+    \]
+
+    \item
+    \[
+    \mathbf{r}(t)=
+    \left(
+    \frac1{t},
+    \frac1{t-2}
+    \right).
+    \]
+
+    \item
+    \[
+    \mathbf{r}(t)=
+    \left(
+    \sqrt{t-5},
+    \ln(t-1),
+    \frac1{t+2}
+    \right).
+    \]
+
+    \item
+    \[
+    \mathbf{r}(t)=
+    \left(
+    e^t,
+    \sqrt{9-t^2},
+    \tan t
+    \right).
+    \]
+\end{enumerate}
+
+
+\newpage
+\section{Limites de funciones vectoriales}
+
+El límite se calcula componente a componente.
+
+Si
+
+\[
+\mathbf{r}(t)=\left(f(t),g(t),h(t)\right),
+\]
+
+entonces
+
+\[
+\lim_{t\to a}\mathbf{r}(t)
+=
+\left(
+\lim_{t\to a}f(t),
+\lim_{t\to a}g(t),
+\lim_{t\to a}h(t)
+\right),
+\]
+
+siempre que existan los límites de cada componente.
+
+\begin{ejercicio}[límite de una función vectorial]
+Calcule
+
+\[
+\lim_{t\to0}
+\left(
+\frac{\sin t}{t},
+t^{2}
+\right).
+\]
+
+\textbf{Solución}
+
+Aplicando el límite componente a componente,
+
+\[
+\lim_{t\to0}
+\frac{\sin t}{t}=1,
+\]
+
+y
+
+\[
+\lim_{t\to0}t^{2}=0.
+\]
+
+Por tanto,
+
+\[
+\boxed{(1,0)}.
+\]
+\end{ejercicio}
+
+% \newpage
+\section{Derivadas de funciones vectoriales}
+
+La derivada también se calcula componente a componente.
+
+Si
+
+\[
+\mathbf{r}(t)=\left(x(t),y(t),z(t)\right),
+\]
+
+entonces
+
+\[
+\mathbf{r}'(t)=
+\left(
+x'(t),
+y'(t),
+z'(t)
+\right).
+\]
+
+Geométricamente, la derivada representa el vector tangente a la curva.
+
+\begin{ejemplo}[Derivada de una función vectorial]
+
+Sea
+
+\[
+\mathbf{r}(t)=
+\left(
+t^{2},
+\sin t,
+e^{t}
+\right).
+\]
+
+Entonces
+
+\[
+\mathbf{r}'(t)=
+\left(
+2t,
+\cos t,
+e^{t}
+\right).
+\]
+\end{ejemplo}
+
+\newpage
+
+\begin{ejercicio}[derivar función vectorial]
+Determine la derivada de
+
+\[
+\mathbf{r}(t)=
+\left(
+t^{3},
+\cos t,
+\sqrt{t}
+\right).
+\]
+
+\textbf{Solución}
+
+\[
+\mathbf{r}'(t)=
+\left(
+3t^{2},
+-\sin t,
+\frac{1}{2\sqrt{t}}
+\right).
+\]
+\end{ejercicio}
+
+% \newpage
+\section{Integrales de funciones vectoriales}
+
+% \newpage
+\section{Continuidad en funciones vectoriales}
+Una función vectorial es continua si todas sus funciones componentes son continuas.
+
+
+% \newpage
+\section{Aplicaciones de funciones vectoriales}
+
+% \newpage
+\section{Resumen}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Función vectorial & $\mathbf{r}:D\subseteq\mathbb{R}\rightarrow\mathbb{R}^{n}$\\
+\hline
+Forma general & $\mathbf{r}(t)=(x(t),y(t),z(t))$\\
+\hline
+Límite & Componente a componente\\
+\hline
+Continuidad & Todas las componentes continuas\\
+\hline
+Derivada & $\mathbf{r}'(t)=(x',y',z')$\\
+\hline
+Interpretación & Curva parametrizada\\
+\hline
+\end{tabular}
+\end{center}
+
+Para una función vectorial
+
+\[
+\mathbf{r}(t)=
+\left(
+f(t),g(t),h(t)
+\right),
+\]
+
+su dominio se obtiene mediante
+
+\[
+\boxed{
+\operatorname{Dom}(\mathbf{r})
+=
+\operatorname{Dom}(f)
+\cap
+\operatorname{Dom}(g)
+\cap
+\operatorname{Dom}(h).
+}
+\]
+
+Es decir, el dominio está formado por aquellos valores del parámetro para los cuales \textbf{todas} las componentes están definidas simultáneamente.
+
+
+
+\section{Ejercicios Propuestos}
+
+\begin{enumerate}
+\item Calcule $\mathbf{r}(3)$ si
+
+\[
+\mathbf{r}(t)=\left(2t-1,t^{2}+1\right).
+\]
+
+\item Determine la derivada de
+
+\[
+\mathbf{r}(t)=
+\left(
+e^{t},
+\ln t,
+t^{4}
+\right).
+\]
+
+\item Calcule
+
+\[
+\lim_{t\to1}
+\left(
+t^{2},
+\frac{t^{3}-1}{t-1}
+\right).
+\]
+
+\item Verifique que
+
+\[
+\mathbf{r}(t)=
+(\cos t,\sin t)
+\]
+
+describe una circunferencia de radio 1.
+
+\item Construya una tabla de valores para
+
+\[
+\mathbf{r}(t)=
+(t,t^{2})
+\]
+
+utilizando
+
+\[
+t=-2,-1,0,1,2.
+\]
+
+Grafique los puntos e identifique la curva obtenida.
+
+\item Determine el vector tangente de
+
+\[
+\mathbf{r}(t)=
+(t^{2},t^{3})
+\]
+
+en $t=1$.
+
+\item Considere
+
+\[
+\mathbf{r}(t)=
+(\cos t,\sin t,t).
+\]
+
+Describa verbalmente la trayectoria que genera esta función.
+
+\item Escriba una función vectorial que describa una recta que pase por el punto $(1,2)$ y tenga dirección $(3,-1)$.
+\end{enumerate}

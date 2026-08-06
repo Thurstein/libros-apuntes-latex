@@ -144,6 +144,20 @@
     title=Ejemplo~\thetcbcounter: #1
 }
 
+% Ejercicio resuelto
+\newtcolorbox[auto counter, number within=chapter]{ejercicio}[1][]{
+    enhanced,
+    breakable,
+    colback=naranjaejercicio,
+    colframe=bordeejercicio,
+    boxrule=0.8pt,
+    arc=3mm,
+    fonttitle=\bfseries\large,
+    coltitle=black,
+    colbacktitle=bordeejercicio!35,
+    title=Ejercicio~\thetcbcounter: #1
+}
+
 % Observación
 \newtcolorbox[auto counter, number within=chapter]{nota}[1][]{
     enhanced,
@@ -319,8 +333,10 @@ Intentaré actualizarlo para incluir los contenidos que vendrán más adelante, 
 
 \addcontentsline{toc}{chapter}{Introducción}
 
-\input{capitulo1}
-\input{capitulo2}
+\input{capitulo Funciones vectoriales}
+\input{capitulo Limites y continuidad}
+\input{capitulo Derivadas parciales}
+
 
 \end{document}
 
