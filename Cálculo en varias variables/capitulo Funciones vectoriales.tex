@@ -517,17 +517,23 @@ Determine el dominio de las siguientes funciones vectoriales.
 
 
 \newpage
-\section{Limites de funciones vectoriales}
+\section{Límites de funciones vectoriales}
 
-El límite se calcula componente a componente.
+El concepto de límite para funciones vectoriales es una extensión natural del límite de funciones reales. La diferencia es que ahora la función no devuelve un número, sino un vector.
 
-Si
+La idea fundamental es la siguiente:
 
-\[
-\mathbf{r}(t)=\left(f(t),g(t),h(t)\right),
-\]
+\begin{quote}
+\centering
+\textit{
+``Cuando el parámetro $t$ se aproxima a un valor $a$, \\
+el vector $\mathbf{r}(t)$ se aproxima a un vector fijo $\mathbf{L}$.''
+}
+\end{quote}
 
-entonces
+En términos geométricos, el punto que describe la función vectorial se acerca a una posición determinada en el espacio.
+
+El límite se calcula componente a componente. Si $\mathbf{r}(t)=\left(f(t),g(t),h(t)\right),$ entonces:
 
 \[
 \lim_{t\to a}\mathbf{r}(t)
@@ -538,41 +544,447 @@ entonces
 \lim_{t\to a}h(t)
 \right),
 \]
-
 siempre que existan los límites de cada componente.
 
+\subsection{Definición}
+\begin{definicion}[Límite de una función vectorial]
+Sea:
+\[\mathbf{r}(t)=\left(f(t),g(t),h(t)\right)\]
+Decimos que:
+\[\lim_{t\to a}\mathbf{r}(t)=\mathbf{L},\]
+si existe el vector
+\[\mathbf{L}=(L_1,L_2,L_3)\]
+tal que:
+\[
+\lim_{t\to a}f(t)=L_1,\qquad
+\lim_{t\to a}g(t)=L_2,\qquad
+\lim_{t\to a}h(t)=L_3.
+\]
+En consecuencia,
+\[
+\boxed{
+\lim_{t\to a}\mathbf{r}(t) =
+\left(
+\lim_{t\to a}f(t),
+\lim_{t\to a}g(t),
+\lim_{t\to a}h(t)
+\right)
+}
+\]
+siempre que existan todos los límites de las funciones componentes.
+\end{definicion}
+
+\newpage
+
 \begin{ejercicio}[límite de una función vectorial]
+Calcule:
+\[ \lim_{t\to0} \left( \frac{\sin t}{t}, t^{2} \right) \]
+\textbf{Solución}
+
+Aplicando el límite componente a componente:
+
+\begin{itemize}
+    \item $ \lim_{t\to0} \dfrac{\sin t}{t}=1 $
+    \item $ \lim_{t\to0}t^{2}=0 $
+\end{itemize}
+
+Por tanto:
+\[ \lim_{t\to0} \left( \frac{\sin t}{t}, t^{2} \right)  = (1,0) \]
+\end{ejercicio}
+
+\subsection{Interpretación geométrica}
+
+Una función vectorial puede interpretarse como el movimiento de una partícula. Si $ \mathbf{r}(t)= (x(t),y(t),z(t)) $, entonces cada valor de $t$ determina una posición en el espacio. Cuando $ t\rightarrow a $, la partícula se aproxima al punto $(L_1,L_2,L_3).$
+
+Es importante notar que el límite puede existir incluso cuando la función no esté definida en $t=a$.
+
+\section*{Propiedad Fundamental}
+
+El límite de una función vectorial existe si y sólo si existen los límites de todas sus componentes.
+
+Esta propiedad simplifica enormemente el cálculo de límites, pues basta trabajar con funciones reales, cuyos métodos ya son conocidos.
+
+\newpage
+
+\begin{ejemplo}[ ]
 Calcule
 
 \[
-\lim_{t\to0}
-\left(
-\frac{\sin t}{t},
-t^{2}
-\right).
+\lim_{t\to2}
+(3t,\;t^2).
 \]
 
 \textbf{Solución}
 
-Aplicando el límite componente a componente,
+Calculamos cada componente.
+
+Primera componente:
 
 \[
-\lim_{t\to0}
-\frac{\sin t}{t}=1,
+\lim_{t\to2}3t=6.
 \]
 
-y
+Segunda componente:
 
 \[
-\lim_{t\to0}t^{2}=0.
+\lim_{t\to2}t^2=4.
 \]
 
 Por tanto,
 
 \[
-\boxed{(1,0)}.
+\boxed{
+\lim_{t\to2}(3t,t^2)
+=
+(6,4).
+}
 \]
-\end{ejercicio}
+\end{ejemplo}
+
+\begin{ejemplo}[ ]
+Calcule
+\[
+\lim_{t\to0}
+\left(
+\frac{\sin t}{t},
+e^t,
+t^3
+\right).
+\]
+\textbf{Solución}
+Se calcula cada componente por separado.
+
+\[
+\lim_{t\to0}\frac{\sin t}{t}=1,
+\]
+
+\[
+\lim_{t\to0}e^t=1,
+\]
+
+\[
+\lim_{t\to0}t^3=0.
+\]
+Luego,
+\[
+\boxed{
+(1,1,0).
+}
+\]
+\end{ejemplo}
+
+\newpage
+
+\begin{ejemplo}[ ]
+
+Calcule
+
+\[
+\lim_{t\to1}
+\left(
+\frac{t^2-1}{t-1},
+\sqrt{t+3}
+\right).
+\]
+
+\textbf{Solución}
+
+Para la primera componente,
+
+\[
+\frac{t^2-1}{t-1}
+=
+t+1,
+\qquad t\neq1.
+\]
+
+Entonces,
+
+\[
+\lim_{t\to1}\frac{t^2-1}{t-1}=2.
+\]
+
+Para la segunda,
+
+\[
+\lim_{t\to1}\sqrt{t+3}=2.
+\]
+
+Finalmente,
+
+\[
+\boxed{(2,2).}
+\]
+\end{ejemplo}
+
+\begin{ejemplo}[ ]
+
+Determine si existe
+
+\[
+\lim_{t\to0}
+\left(
+\frac1t,\;
+\sin t
+\right).
+\]
+
+\textbf{Solución}
+
+La primera componente no posee límite cuando
+
+\[
+t\rightarrow0.
+\]
+
+Aunque
+
+\[
+\lim_{t\to0}\sin t=0,
+\]
+
+el límite de la función vectorial no existe.
+
+\[
+\boxed{
+\lim_{t\to0}
+\left(
+\frac1t,\sin t
+\right)
+\text{ no existe.}
+}
+\]
+\end{ejemplo}
+
+
+\begin{teorema}[\\Propiedades de los Límites de funciones vectoriales]
+Sean $ \mathbf{r}(t), \; \mathbf{s}(t) $ funciones vectoriales y $ c \in \mathbb{R} $ una constante. Si existen los límites correspondientes, entonces:
+
+\begin{enumerate}
+    \item \textbf{Suma}:
+        \[
+        \lim_{t\to a}
+        \left(
+        \mathbf{r}(t)+\mathbf{s}(t)
+        \right)
+        =
+        \lim_{t\to a}\mathbf{r}(t)
+        +
+        \lim_{t\to a}\mathbf{s}(t).
+        \]
+    \item \textbf{Multiplicación por un escalar}:
+        \[
+        \lim_{t\to a}
+        c\mathbf{r}(t)
+        =
+        c
+        \lim_{t\to a}\mathbf{r}(t).
+        \]
+    \item \textbf{Producto punto}: Si $ \mathbf{r}(t) \cdot \mathbf{s}(t) $
+        está definido,
+        \[
+        \lim_{t\to a}
+        \left(
+        \mathbf{r}\cdot\mathbf{s}
+        \right)
+        =
+        \left(
+        \lim\mathbf{r}
+        \right)
+        \cdot
+        \left(
+        \lim\mathbf{s}
+        \right).
+        \]
+    \item \textbf{Producto cruz}: En $\mathbb{R}^3$,
+        \[
+        \lim_{t\to a}
+        \left(
+        \mathbf{r}\times\mathbf{s}
+        \right)
+        =
+        \left(
+        \lim\mathbf{r}
+        \right)
+        \times
+        \left(
+        \lim\mathbf{s}
+        \right).
+        \]
+\end{enumerate}
+\end{teorema}
+
+\section*{Relación entre Límite y Continuidad}
+
+Una función vectorial es continua en $t=a$ si
+
+\[
+\lim_{t\to a}\mathbf{r}(t)
+=
+\mathbf{r}(a).
+\]
+
+Como consecuencia, una función vectorial será continua cuando todas sus componentes sean funciones continuas.
+
+\section*{Errores Frecuentes}
+
+\begin{enumerate}
+    \item Intentar calcular el límite del vector completo sin analizar cada componente.
+
+    \item Pensar que basta con que una componente tenga límite para que exista el límite vectorial.
+
+    \item Olvidar simplificar expresiones indeterminadas antes de sustituir.
+
+    \item Confundir el punto al que tiende el parámetro con el vector límite.
+\end{enumerate}
+
+\section*{Ejercicios Propuestos}
+
+Calcule los siguientes límites.
+
+\begin{enumerate}
+
+\item
+
+\[
+\lim_{t\to3}
+(t^2,\;2t,\;5).
+\]
+
+\item
+
+\[
+\lim_{t\to0}
+(\sin t,\cos t).
+\]
+
+\item
+
+\[
+\lim_{t\to1}
+\left(
+\frac{t^2-1}{t-1},
+t^3
+\right).
+\]
+
+\item
+
+\[
+\lim_{t\to0}
+\left(
+\frac{\sin t}{t},
+\frac{1-\cos t}{t}
+\right).
+\]
+
+\item
+
+\[
+\lim_{t\to4}
+(\sqrt{t},\ln t).
+\]
+
+\item
+
+\[
+\lim_{t\to0}
+\left(
+\frac1t,
+t^2
+\right).
+\]
+
+Indique si existe o no el límite.
+
+\item
+
+Sean
+
+\[
+\mathbf{u}(t)=
+(t,2t)
+\]
+
+y
+
+\[
+\mathbf{v}(t)=
+(t^2,1).
+\]
+
+Calcule
+
+\[
+\lim_{t\to1}
+(\mathbf{u}(t)+\mathbf{v}(t)).
+\]
+
+\item
+
+Sean
+
+\[
+\mathbf{u}(t)=
+(t,1,t^2),
+\qquad
+\mathbf{v}(t)=
+(2,t,1).
+\]
+
+Calcule
+
+\[
+\lim_{t\to2}
+(\mathbf{u}(t)\cdot\mathbf{v}(t)).
+\]
+
+\end{enumerate}
+
+\section*{Resumen}
+
+Sea
+
+\[
+\mathbf{r}(t)=
+(f(t),g(t),h(t)).
+\]
+
+El límite se calcula componente a componente:
+
+\[
+\boxed{
+\lim_{t\to a}\mathbf{r}(t)
+=
+\left(
+\lim_{t\to a}f(t),
+\lim_{t\to a}g(t),
+\lim_{t\to a}h(t)
+\right).
+}
+\]
+
+El límite existe únicamente cuando existen los límites de todas las componentes.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Operación & Regla\\
+\hline
+Suma & Se calcula componente a componente\\
+\hline
+Escalar por vector & El escalar multiplica cada componente\\
+\hline
+Producto punto & El límite puede entrar al producto\\
+\hline
+Producto cruz & El límite puede entrar al producto\\
+\hline
+Continuidad & $\displaystyle \lim_{t\to a}\mathbf{r}(t)=\mathbf{r}(a)$\\
+\hline
+\end{tabular}
+\end{center}
 
 % \newpage
 \section{Derivadas de funciones vectoriales}
